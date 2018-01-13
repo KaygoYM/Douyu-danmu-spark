@@ -1,7 +1,7 @@
 Douyu-danmu-spark
 ----
 # Introduction</br>
-Compared to The first version of [Douyu_danmu](https://github.com/KaygoYM/Data-Mining/tree/master/Data_Mining_App/DouyuTV), in this repository, the analysis of Douyu_TV's danmu is based on SPARK.</br>
+Compared to The first version of [Douyu_danmu](https://github.com/KaygoYM/Data-Mining/tree/master/Data_Mining_App/DouyuTV), in this repository, the analysis of Douyu_TV's danmu is based on SPARK instead of MYSQL(Pymysql).</br>
 # Environment:</br>
 Python 3.6</br>
 Module jieba, wordcloud</br>
