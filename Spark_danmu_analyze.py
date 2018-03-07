@@ -23,7 +23,7 @@ mlp.rcParams['figure.figsize']=(8,6)
 
 rid=input('输入房间号：')
 txt_name=str(rid)+'_'+str(time.strftime("%d_%m_%Y"))+'.txt'
-#txt_name=str(rid)+'_21_01_2018'
+#txt_name=str(rid)+'_04_02_2018.txt'
 #txt = open(txt_name+'.txt','r',encoding='gbk')
 
 conf = SparkConf().setMaster("local[*]").setAppName("DouyuApp")
@@ -67,7 +67,7 @@ print('话痨榜: ',Tops,file=result)
 #id+level作为筛选标准
 levels=danmu_data.map(lambda x:(int(x[0]),int(x[2]))).groupByKey().map(lambda x:(x[0],np.ceil(np.median(list(x[1])))))
 levels=np.array(levels.collect())[:,1]
-print("平均观众等级：%d"%(np.median(levels),),file=result)
+print("观众等级中值：%d"%(np.median(levels),),file=result)
 lbins=np.arange(min(levels),max(levels),2)
 plt.figure(1)
 plt.hist(levels,lbins,histtype='bar',facecolor='orange',edgecolor='black',alpha=0.75,rwidth=0.8)
@@ -89,11 +89,11 @@ sizes=Top_badges[:,1].astype(np.int)/sum(Top_badges[:,1].astype(np.int))
 colors='lightcoral','gold','lightskyblue','yellow','yellowgreen'
 explode=0.5,0.4,0.2,0.2,0
 plt.figure(2)
-_,t_text,p_text=plt.pie(tuple(sizes), explode=explode, labels=tuple(labels), colors=colors, autopct='%1.1f%%',
+_,t_text,p_text=plt.pie(tuple(sizes),labels=tuple(labels), explode=explode,colors=colors, autopct='%1.1f%%',
         shadow=True, startangle=50)
 for p,t in zip(p_text,t_text):
-    t.set_size=(20)
-    p.set_size=(20)
+    t.set_size=(40)
+    p.set_size=(40)
 plt.axis('equal')
 #plt.title("观众前五牌子比例")
 plt.savefig('%s TOP5 badge.png'%(txt_name,),dpi=300)
@@ -119,33 +119,41 @@ import jieba.analyse as ana
 import jieba.posseg as psg
 danmu_content=danmu_data.map(lambda x:x[3]).collect()
 #print(danmu_content)
-content="".join(danmu_content)
+content=" ".join(danmu_content)
 #print(content)
 #danmu_words=jieba.cut_for_search(content)
 danmu_words_flags=[(x.word,x.flag) for x in psg.cut(content)]#获取词的属性以便过滤
-stop_attr = ['a','b','c','d','f','df','p','r','rr','s','t','u','ule','ude1','v','z','x','wj','wd','y','e']
-stop_word = ['了','的','吧','吗','个','人','部']
+stop_attr = ['a','b','c','d','f','df','p','r','rr','s','t','u','ule','ude1','v','z','x','y','e']
+stop_word = ['了','的','吧','吗','个','人','部','1','2','3','4','一']
 # 过滤掉不需要的词性的词
 Topwords = [x[0] for x in danmu_words_flags if x[1] not in stop_attr and x[0] not in stop_word]
 from collections import Counter
-c = Counter(Topwords).most_common(100)
+c = Counter(Topwords).most_common(50)
 #以词云显示
 from wordcloud import WordCloud,STOPWORDS,ImageColorGenerator
+'''
 text=dict(c)
-#backgroud_Image = plt.imread('cover_chicken.jpg')
-backgroud_Image = plt.imread('cover_love.jpg')
+backgroud_Image = plt.imread('cover_chicken.jpg')
+#backgroud_Image = plt.imread('cover_love.jpg')
 wc = WordCloud( background_color = 'white',    # 设置背景颜色
                 mask = backgroud_Image,        # 设置背景图片
                 max_words = 200,            # 设置最大现实的字数
                 stopwords = STOPWORDS,        # 设置停用词
                 font_path = './fonts/simhei.ttf',# 设置字体格式，如不设置显示不了中文
-                max_font_size = 30,            # 设置字体最大值
+                max_font_size = 30,# 设置字体最大值
+                width=1000,
+                height=860,
                 #min_font_size = 10,               
                 random_state = 24,            # 设置有多少种随机生成状态，即有多少种配色方案
                 )
 wc.generate_from_frequencies(text)
 image_colors = ImageColorGenerator(backgroud_Image)
 wc.recolor(color_func = image_colors)
+'''
+text=dict(c)
+wc = WordCloud(background_color="lightyellow",width=1200, height=860, margin=2,font_path = './fonts/simhei.ttf',).generate_from_frequencies(text)
+#wc = WordCloud(background_color="lightyellow",width=1200, height=860, margin=2,font_path = './fonts/simhei.ttf',
+ #              stopwords=STOPWORDS).generate(content)
 plt.imshow(wc)
 plt.axis('off')
 plt.savefig('%s hot_words.png'%(txt_name,),dpi=600)
@@ -167,7 +175,7 @@ print("VIP节奏位 ",vip_content,file=result)
 '''
 #%%=========关注数变化========热度变化===========#
 txt_name_room=str(rid)+'_'+str(time.strftime("%d_%m_%Y"))+'room.txt'
-#txt_name_room=str(rid)+'_21_01_2018room.txt'
+#txt_name_room=str(rid)+'_04_02_2018room.txt'
 roominformation=sc.textFile(txt_name_room)
 roominfo=roominformation.map(lambda lines:lines.strip('\n').split('|'))
 roominfo=np.array(roominfo.collect())[:,0:2].astype(np.int)
@@ -177,13 +185,13 @@ fans=roominfo[:,1]
 
 print('今日关注量增长约: ',fans[-1]-fans[0],file=result)
 print('今日热度峰值: ',np.max(hot),file=result)
-print('今日平均热度: ',round(np.median(hot)),file=result)
+print('今日热度中值: ',round(np.median(hot)),file=result)
 #plt.figure(4)
 fig,ax1 = plt.subplots()
 ax2 = ax1.twinx()
 #ax1.xaxis.set_major_formatter(mdate.DateFormatter('%Y-%m-%d %H:%M:%S'))#设置时间标签显示格式
-#plt.xticks(pd.date_range('2018-02-01 09:08:44',data.index[-1],freq='5min'))#时间间隔
-#plt.xticks(rotation=30)
+#plt.xticks(pd.date_range('2018-02-04 09:00:44','2018-02-04 15:54:44',freq='5min'))#时间间隔
+plt.xticks(rotation=30)
 ax1.plot(fans, 'ro-',label='关注量',linewidth=3.0)
 ax2.plot(hot, 'm^-',label='热度',linewidth=3.0)
 ax1.set_xlabel('时间序列')
@@ -196,7 +204,7 @@ plt.savefig('%s hot and fans.png'%(txt_name,),dpi=300)
 
 #%%========礼物=============#
 txt_name_gift=str(rid)+'_'+str(time.strftime("%d_%m_%Y"))+'gift.txt'
-#txt_name_gift=str(rid)+'_'+'21_01_2018gift.txt'
+#txt_name_gift=str(rid)+'_04_02_2018gift.txt'
 giftlist=sc.textFile(txt_name_gift)
 gift_info=giftlist.map(lambda lines:lines.strip('\n').split('->'))
 gift=gift_info.groupBy(lambda x:x[1]).map(lambda x:(x[0],len(x[1])))

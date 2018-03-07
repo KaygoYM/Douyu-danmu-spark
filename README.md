@@ -1,4 +1,4 @@
-Douyu-danmu-spark
+﻿Douyu-danmu-spark
 ====
 Version 3.0||Fin version
 ----
@@ -13,12 +13,16 @@ Windows10 (64bit)</br>
 # HOW TO USE
 ## Scrapy
 In Anaconda Prompt/CMD, print`"python Spark_danmu_scrapy.py"`, and then input the room-id to activate the scrapy process.</br>
+OR use the .exe app in the link below.
 ## Analyze
 After the live-broadcast show, stop the scrapy process. In Anaconda Prompt/CMD, print`"python Spark_danmu_analyze.py"`, and then input the room-id to activate the analyze process.</br>
 ## Result
-The results include: Hot Words/The hist of level/The Top5 badges and so on. Just as shown in [687423_01_11_2018.jpg](https://github.com/KaygoYM/Douyu-danmu-spark/blob/master/687423_01_11_2018.jpg) and [156277_01_19_2018.jpg](https://github.com/KaygoYM/Douyu-danmu-spark/blob/master/156277_01_19_2018.jpg) (two examples).</br>
+The results include: Hot Words/The histogram of level/The Top5 badges and so on. Just as shown in [687423_03_07_2018.jpg](https://github.com/KaygoYM/Douyu-danmu-spark/blob/master/Reports/687423_03_07_2018.jpg) and [156277_01_21_2018.jpg](https://github.com/KaygoYM/Douyu-danmu-spark/blob/master/Reports/156277_01_21_2018.jpg) (two examples).</br>
 # Tips
-The psd files are the templets that I use to make the final reports.</br>
-Like nvliu66 and yjjimpaopao.Like 156277 and 687423 (???_??)? </br>
-# Future work
-Although the data may be correct generally, my scrapy process still requires further improvement since the effect and the accuracy of scrapy is worse when the amount of danmu increases suddenly. (NEEDS TO BE DONE SOON OR PROBABLY NO MORE UPDATE ( ?�� ?? ?��) )</br>
+The psd files are the templets that I use to make the daily reports.</br>
+Like nvliu66 and yjjimpaopao.Like 156277 and 687423 (ง•̀_•́)ง </br>
+# APP
+
+BAIDU CLOUD: 链接(Link): http://t.cn/R8MZkGV 密码(PWD): h5ed </br>
+# Further work
+Monthly or Yearly Report——By applying [KMEANS](https://github.com/KaygoYM/Douyu-danmu-spark/tree/master/Kmeans) to help host improve the LIVE.

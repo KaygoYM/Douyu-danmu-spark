@@ -153,13 +153,13 @@ if __name__ == '__main__':
     for each in room_info['gift']:
         giftlist[each['id']]=each['name']
         print(each['id'], giftlist[each['id']])
-    p2 = multiprocessing.Process(target=keeplive)
+    p2 = threading.Thread(target=keeplive)
     p2.start()
-    p3 = multiprocessing.Process(target=get_room_info,args=(room_id,))
+    p3 = threading.Thread(target=get_room_info,args=(room_id,))
     p3.start()
 #    while True:
     while True:
-        p1 = multiprocessing.Process(target=starting, args=(room_id,giftlist))
+        p1 = threading.Thread(target=starting, args=(room_id,giftlist))
         p1.start()
         p1.join()
     #p1.join()
