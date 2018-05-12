@@ -17,7 +17,7 @@ OR use the .exe app in the link below.
 ## Analyze
 After the live-broadcast show, stop the scrapy process. In Anaconda Prompt/CMD, print`"python Spark_danmu_analyze.py"`, and then input the room-id to activate the analyze process.</br>
 ## Result
-The results include: Hot Words/The histogram of level/The Top5 badges and so on. Just as shown in [687423_03_07_2018.jpg](https://github.com/KaygoYM/Douyu-danmu-spark/blob/master/Reports/687423_03_07_2018.jpg) and [156277_01_21_2018.jpg](https://github.com/KaygoYM/Douyu-danmu-spark/blob/master/Reports/156277_01_21_2018.jpg) (two examples).</br>
+The results include: Hot Words/The histogram of level/The Top5 badges and so on. Just as shown in ![687423_03_07_2018.jpg](https://github.com/KaygoYM/Douyu-danmu-spark/blob/master/Reports/687423_03_07_2018.jpg)</br> and </br>![156277_01_21_2018.jpg](https://github.com/KaygoYM/Douyu-danmu-spark/blob/master/Reports/156277_01_21_2018.jpg)</br>(two examples)</br>
 # Tips
 The psd files are the templets that I use to make the daily reports.</br>
 Like nvliu66 and yjjimpaopao.Like 156277 and 687423 (ง•̀_•́)ง </br>
