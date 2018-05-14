@@ -26,4 +26,4 @@ Like nvliu66 and yjjimpaopao.Like 156277 and 687423 (ง•̀_•́)ง </br>
 BAIDU CLOUD: 链接(Link): http://t.cn/R8MZkGV 密码(PWD): h5ed </br>
 # Further work
 Monthly or Yearly Report——By applying [KMEANS](https://github.com/KaygoYM/Douyu-danmu-spark/tree/master/Kmeans) to help host improve the LIVE.</br>
-!(https://github.com/KaygoYM/Douyu-danmu-spark/blob/master/Kmeans/Month_Report2.jpg)</br>
+![](https://github.com/KaygoYM/Douyu-danmu-spark/blob/master/Kmeans/Month_Report2.jpg "直播分析报告/数据分析")</br>
